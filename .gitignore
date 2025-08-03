@@ -1,0 +1,29 @@
+# Build directories
+cmake-build-*/
+build/
+out/
+
+# CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Object and binary files
+*.o
+*.out
+*.a
+*.so
+*.exe
+
+# CLion/IDEA
+.idea/
+*.iml
+
+# Logs or temp
+*.log
+*.tmp
+
+# OS-specific
+.DS_Store
+Thumbs.db
