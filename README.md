@@ -1,26 +1,64 @@
-## Project Structure
-### Folder Descriptions
+# Crypto Labs Runner
 
-- **`CMakeLists.txt`**  
-  Defines the build system. Lists source files, headers, and targets.
+This project is a simple C program that allows users to select and "run" predefined lab challenges related to cryptography using OpenSSL. It acts as a launcher and validator for available lab names.
 
-- **`include/`**  
-  Public header files shared across modules. Contains function declarations, macros, and data types.
+## 🧩 Available Labs
 
-- **`src/`**  
-  C source files and their private headers. Each cryptographic lab or attack is modularized (e.g., `rsa_attack.c`, `xor_decrypt.c`).  
-  The `main.c` serves as the main entry point for executing labs.
+- **openssl-sym**:
+  - `guess-algo`
+  - `firstdecryption`
+  - `in-the-name-of-the-cipher`
+  - `padding`
+- **openssl-asym**:
+  - `guess-what`
+- **openssl-hmac**:
+  - `firsthmac`
+- **openssl-dgst**:
+  - `changedgst`
+  - `keyed-digest`
+- **openssl-rand**:
+  - `bytewise-operations`
 
-- **`tests/`**  
-  Unit or functional tests for source modules. Example: `test_rsa.c` validates `rsa_attack.c`.
+---
 
-- **`data/`**  
-  Input files used in labs (e.g., encrypted messages, keys). Organized per challenge.  
-  Contains no build artifacts or outputs.
+## 🛠️ Requirements
 
-- **`examples/`**  
-  Scripts or usage examples for running modules. Useful for demonstrating expected input/output.
+- CMake (>= 3.10)
+- GCC or compatible C compiler
+- Unix-like shell (Linux/macOS/WSL)
+- OpenSSL
 
-- **`docs/`**  
-  Documentation, lab writeups, algorithm explanations. Markdown format preferred.
+---
 
+## 🔧 Compilation
+
+```bash, aiignore
+mkdir build
+cd build
+cmake ..
+make
+```
+
+
+This will generate an executable called `lab-runner`.
+
+---
+
+## ▶️ Running the Project
+
+```bash, aiignore
+./lab-runner
+```
+
+You will be prompted to enter the name of a lab (must match exactly one of the listed names). Example:
+
+```text, aiignore
+enter a lab (full sub-challenge name): guess-algo
+running: guess-algo
+```
+
+If the input is not recognized:
+
+```text, aiignore
+unknown lab: something-else
+```

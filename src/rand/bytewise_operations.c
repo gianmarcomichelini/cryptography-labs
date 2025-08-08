@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+char *remove_dashes(const char *string, const size_t len) {
+    char *cleaned = malloc(len + 1);
+    if (!cleaned) return NULL;
+
+    size_t j = 0;
+    for (size_t i = 0; i < len; i++) {
+        if (string[i] != '-') {
+            cleaned[j++] = string[i];
+        }
+    }
+    cleaned[j] = '\0';
+    return cleaned;
+}
+
+unsigned char hex_to_byte(const char high, const char low) {
+    const unsigned char h = isdigit(high) ? high - '0' : tolower(high) - 'a' + 10;
+    const unsigned char l = isdigit(low) ? low - '0' : tolower(low) - 'a' + 10;
+    return (h << 4) | l;
+}
+
+int bytewise_operations(void) {
+    printf("Given two random numbers:\n");
+    const char *RAND1 =
+        "ed-8a-3b-e8-17-68-38-78-f6-b1-77-3e-73-b3-f7-97-f3-00-47-76-54-ee-8d-51-0a-2f-10-79-17-f8-ea-d8-81-83-6e-0f-0c-b8-49-5a-77-ef-2d-62-b6-5e-e2-10-69-d6-cc-d6-a0-77-a2-0a-d3-f7-9f-a7-9e-a7-c9-08";
+    const char *RAND2 =
+        "4c-75-82-ca-02-07-bd-1d-8d-52-f0-6c-7a-d6-b7-87-83-95-06-2f-e0-f7-d4-24-f8-03-68-97-41-4c-85-29-e5-0d-b0-e4-3c-ee-74-dc-18-8a-aa-26-f0-46-94-e8-52-91-4a-43-8f-dd-ea-bb-a8-cf-51-14-79-ec-17-c2";
+
+    const size_t len = strlen(RAND1);
+    if (len != strlen(RAND2)) {
+        fprintf(stderr, "ERROR: random numbers with different lengths\n");
+        return EXIT_FAILURE;
+    }
+
+    char *r1 = remove_dashes(RAND1, len);
+    char *r2 = remove_dashes(RAND2, len);
+
+    if (!r1 || !r2) {
+        fprintf(stderr, "Memory allocation failed\n");
+        free(r1);
+        free(r2);
+        return EXIT_FAILURE;
+    }
+
+    const size_t bytes_len = strlen(r1) / 2;
+    unsigned char *key = malloc(bytes_len);
+    if (!key) {
+        fprintf(stderr, "Memory allocation failed\n");
+        free(r1);
+        free(r2);
+        return EXIT_FAILURE;
+    }
+
+    for (size_t i = 0; i < bytes_len; i++) {
+        const unsigned char b1 = hex_to_byte(r1[i*2], r1[i*2 + 1]);
+        const unsigned char b2 = hex_to_byte(r2[i*2], r2[i*2 + 1]);
+        key[i] = b1 ^ b2;
+    }
+
+    printf("XOR result:\n");
+    for (size_t i = 0; i < bytes_len; i++) {
+        printf("%02X", key[i]);
+    }
+    printf("\n");
+
+    free(r1);
+    free(r2);
+    free(key);
+
+    return 0;
+}
