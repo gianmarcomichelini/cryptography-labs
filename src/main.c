@@ -21,7 +21,7 @@ int main(void) {
     printf("  - openssl-asym: guess-what\n");
     printf("  - openssl-hmac: firsthmac\n");
     printf("  - openssl-dgst: changedgst, keyed-digest\n");
-    printf("  - openssl-rand: bytewise-operations\n");
+    printf("  - openssl-rand: bytewise-operations, create-randoms\n");
     printf("\nenter a lab (full sub-challenge name): ");
 
     if (fgets(input, sizeof(input), stdin) != NULL) {
@@ -42,6 +42,7 @@ int main(void) {
         else if (strcmp(input, "changedgst") == 0) change_dgst();
         else if (strcmp(input, "keyed-digest") == 0) keyed_digest();
         else if (strcmp(input, "bytewise-operations") == 0) bytewise_operations();
+        else if (strcmp(input, "create-randoms") == 0) create_randoms();
         else {
             fprintf(stderr, "unknown lab: %s\n", input);
             return 1;

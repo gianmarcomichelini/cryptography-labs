@@ -6,5 +6,6 @@
 #define RAND_H
 
 extern int bytewise_operations(void);
+extern int create_randoms(void);
 
 #endif //RAND_H
