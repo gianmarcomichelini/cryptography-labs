@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "rand/rand.h"
+#include "hashing/hashing.h"
 
-// Function declarations
 void guess_algo(void);
 void first_decryption(void);
 void in_the_name_of_the_cipher(void);
@@ -20,7 +20,7 @@ int main(void) {
     printf("  - openssl-sym: guess-algo, firstdecryption, in-the-name-of-the-cipher, padding\n");
     printf("  - openssl-asym: guess-what\n");
     printf("  - openssl-hmac: firsthmac\n");
-    printf("  - openssl-dgst: changedgst, keyed-digest\n");
+    printf("  - openssl-dgst: dgst-basics, changedgst, keyed-digest\n");
     printf("  - openssl-rand: bytewise-operations, create-randoms\n");
     printf("\nenter a lab (full sub-challenge name): ");
 
@@ -32,6 +32,8 @@ int main(void) {
             return 1;
         }
 
+
+
         // Dispatch table
         if (strcmp(input, "guess-algo") == 0) guess_algo();
         else if (strcmp(input, "firstdecryption") == 0) first_decryption();
@@ -39,6 +41,7 @@ int main(void) {
         else if (strcmp(input, "padding") == 0) padding();
         else if (strcmp(input, "guess-what") == 0) guess_what();
         else if (strcmp(input, "firsthmac") == 0) first_hmac();
+        else if (strcmp(input, "dgst-basics") == 0) hashing_basics();
         else if (strcmp(input, "changedgst") == 0) change_dgst();
         else if (strcmp(input, "keyed-digest") == 0) keyed_digest();
         else if (strcmp(input, "bytewise-operations") == 0) bytewise_operations();

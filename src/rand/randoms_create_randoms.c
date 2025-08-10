@@ -54,7 +54,7 @@ int create_randoms(void) {
         if (err) {
             print_openssl_errors(err, buf);
         }
-        fprintf(stderr, "ERROR: RAND_bytes failed\n");
+        ERR_print_errors_fp(stderr);
         return EXIT_FAILURE;
     }
 

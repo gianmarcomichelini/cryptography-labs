@@ -12,10 +12,12 @@ include_directories(include)
 add_executable(ctf_lab_runner
         src/main.c
         src/utils.c
-        src/rand/bytewise_operations.c
-        src/rand/create_randoms.c
+        src/rand/randoms_bytewise_operations.c
+        src/rand/randoms_create_randoms.c
         include/rand/rand.h
         include/utils.h
+        include/hashing/hashing.h
+        src/hashing/hashing_md5_basics.c
 )
 
 target_link_libraries(ctf_lab_runner OpenSSL::SSL OpenSSL::Crypto)
