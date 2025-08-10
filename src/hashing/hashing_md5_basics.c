@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <openssl/evp.h>
-#include <openssl/types.h>
 
 __attribute__((noreturn))
 void handle_errors(const char *err, EVP_MD_CTX *ctx) {
@@ -18,7 +16,7 @@ void print_context_info(EVP_MD_CTX *ctx) {
         return;
     }
 
-    printf("\tDigest context pointer address: %p\n", (void *)ctx);
+    printf("\tDigest context pointer address: %p\n", (void *) ctx);
 
     const EVP_MD *md = EVP_MD_CTX_get0_md(ctx);
     if (md) {
@@ -36,8 +34,10 @@ int hashing_basics(void) {
         "\n"
         "================================"
         "\n"
-        "Execute basic hashing operations\n"
-        "================================\n\n");
+        "Execute basic hashing operations"
+        "\n"
+        "================================"
+        "\n\n");
 
     printf("Create the context...\n\n");
     EVP_MD_CTX *md_ctx = EVP_MD_CTX_new();
@@ -46,7 +46,8 @@ int hashing_basics(void) {
     print_context_info(md_ctx);
 
     printf("Initialize the context...\n\n");
-    rc = EVP_DigestInit_ex(md_ctx, EVP_md5(), NULL);
+    const EVP_MD *hash_function = EVP_md5();
+    rc = EVP_DigestInit_ex(md_ctx, hash_function, NULL);
     if (rc != 1)
         handle_errors("ERROR: initializing the digest context", md_ctx);
     print_context_info(md_ctx);
@@ -58,13 +59,13 @@ int hashing_basics(void) {
         handle_errors("ERROR: updating the digest context", md_ctx);
 
     printf("Allocating heap memory for the digest\n\n");
-    const unsigned int digest_len = EVP_MD_size(EVP_sha256());
-    unsigned char* digest = (unsigned char*) OPENSSL_malloc(digest_len);
+    const unsigned int digest_len = EVP_MD_size(hash_function);
+    unsigned char *digest = (unsigned char *) OPENSSL_malloc(digest_len);
     if (!digest)
         handle_errors("ERROR: Allocating memory for the digest", md_ctx);
 
     printf("Store the context output in the digest...\n");
-    rc = EVP_DigestFinal_ex(md_ctx,digest, &digest_len);
+    rc = EVP_DigestFinal_ex(md_ctx, digest, &digest_len);
     if (rc != 1)
         handle_errors("ERROR: Storing the context output in the digest", md_ctx);
 
@@ -73,7 +74,9 @@ int hashing_basics(void) {
         printf("%02X", digest[i]);
     printf("\n\n");
 
-    printf("Free the context...\n\n");
+    printf("Cleanup...\n\n");
     EVP_MD_CTX_free(md_ctx);
+    OPENSSL_free(digest);
+
     return 0;
 }
