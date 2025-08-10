@@ -11,8 +11,6 @@
 
 #define LEN 32
 
-
-
 int create_randoms(void) {
 
     printf(

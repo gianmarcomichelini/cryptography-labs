@@ -19,8 +19,8 @@ int main(void) {
     printf("available labs:\n");
     printf("  - openssl-sym: guess-algo, firstdecryption, in-the-name-of-the-cipher, padding\n");
     printf("  - openssl-asym: guess-what\n");
-    printf("  - openssl-hmac: firsthmac\n");
-    printf("  - openssl-dgst: dgst-basics, changedgst, keyed-digest\n");
+    printf("  - openssl-hmac: hmac_compute, hmac_verify, firsthmac\n");
+    printf("  - openssl-dgst: md5_compute, changedgst, keyed-digest\n");
     printf("  - openssl-rand: bytewise-operations, create-randoms\n");
     printf("\nenter a lab (full sub-challenge name): ");
 
@@ -41,7 +41,9 @@ int main(void) {
         else if (strcmp(input, "padding") == 0) padding();
         else if (strcmp(input, "guess-what") == 0) guess_what();
         else if (strcmp(input, "firsthmac") == 0) first_hmac();
-        else if (strcmp(input, "dgst-basics") == 0) hashing_basics();
+        else if (strcmp(input, "hmac_verify") == 0) hashing_hmac_verify();
+        else if (strcmp(input, "hmac_compute") == 0) hashing_hmac_compute();
+        else if (strcmp(input, "md5_compute") == 0) hashing_md5_compute();
         else if (strcmp(input, "changedgst") == 0) change_dgst();
         else if (strcmp(input, "keyed-digest") == 0) keyed_digest();
         else if (strcmp(input, "bytewise-operations") == 0) bytewise_operations();

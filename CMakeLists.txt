@@ -17,7 +17,9 @@ add_executable(ctf_lab_runner
         include/rand/rand.h
         include/utils.h
         include/hashing/hashing.h
-        src/hashing/hashing_md5_basics.c
+        src/hashing/hashing_md5_compute.c
+        src/hashing/hashing_hmac_compute.c
+        src/hashing/hashing_hmac_verify.c
 )
 
 target_link_libraries(ctf_lab_runner OpenSSL::SSL OpenSSL::Crypto)
