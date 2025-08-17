@@ -35,6 +35,13 @@ add_executable(ctf_lab_runner
         src/enc_symm/enc_symm_encrypt_compute_from_file.c
         tests/enc_symm/test_encrypt_aes256cbc_compute_from_file.c
         src/enc_symm/enc_symm_decrypt_compute_from_file.c
+        tests/bignum/test_bignum_basics.c
+        src/bignum/bignum_basics.c
+        include/bignum/bignum_utils.h
+        src/bignum/bignum_copy.c
+        src/bignum/bignum_conversions.c
+        tests/bignum/test_bignum_basic_operations.c
+        src/bignum/bignum_basic_operations.c
 )
 
 target_link_libraries(ctf_lab_runner OpenSSL::SSL OpenSSL::Crypto)

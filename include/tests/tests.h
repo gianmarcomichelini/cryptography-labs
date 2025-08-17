@@ -23,5 +23,11 @@ extern int test_encrypt_aes256cbc_compute_from_file (void);
 
 extern int test_encrypt_aes256cbc_compute_from_file(void);
 
+extern int test_bignum_basics(void);
+
+extern int test_bignum_basic_operations(void);
+
+
+
 
 #endif //TESTS_H

@@ -18,6 +18,8 @@ static test_entry_t tests[] = {
     {"hmac_sha256_compute_from_file", test_hmac_sha256_compute_from_file},
     {"encrypt_aes256_from_message", test_encrypt_aes256_compute},
     {"encrypt_decrypt_aes256_from_file", test_encrypt_aes256cbc_compute_from_file},
+    {"bignum_basics", test_bignum_basics},
+    {"bignum_basic_operations", test_bignum_basic_operations},
     {NULL, NULL} // terminator
 };
 
