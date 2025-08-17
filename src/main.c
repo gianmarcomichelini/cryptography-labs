@@ -51,7 +51,7 @@ int main(void) {
         int found = 0;
         for (int i = 0; tests[i].name != NULL; i++) {
             if (strcmp(input, tests[i].name) == 0) {
-                int result = tests[i].func();
+                const int result = tests[i].func();
                 printf("Test finished with code %d\n", result);
                 found = 1;
                 break;

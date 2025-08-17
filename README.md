@@ -1,34 +1,34 @@
-# Crypto Labs Runner
+# `cryptography labs`
 
-This project is a simple C program that allows users to select and "run" predefined lab challenges related to cryptography using OpenSSL. It acts as a launcher and validator for available lab names.
-
-## 🧩 Available Labs
-
-- **openssl-sym**:
-  - `guess-algo`
-  - `firstdecryption`
-  - `in-the-name-of-the-cipher`
-  - `padding`
-- **openssl-asym**:
-  - `guess-what`
-- **openssl-hmac**:
-  - `firsthmac`
-- **openssl-dgst**:
-  - `changedgst`
-  - `keyed-digest`
-- **openssl-rand**:
-  - `bytewise-operations`
+A modular C-based cryptography project built on top of **OpenSSL**.  
+It provides a structured set of components for experimenting with modern cryptographic techniques.
 
 ---
 
-## 🛠️ Requirements
+## 🔑 Main Modules
 
-- CMake (>= 3.10)
-- GCC or compatible C compiler
-- Unix-like shell (Linux/macOS/WSL)
-- OpenSSL
+- **Symmetric Encryption**  
+  AES-based encryption/decryption routines with support for both file-oriented and memory-based workflows.
 
----
+- **Asymmetric Encryption**  
+  Foundations for public-key cryptography, leveraging OpenSSL primitives.  
+
+- **Hashing & HMAC**  
+  Support for cryptographic hashing and message authentication codes.  
+  Includes verification and integrity-check mechanisms.
+
+- **Random Number Generation**  
+  Secure random byte generation and PRNG seeding, powered by OpenSSL’s randomness utilities.
+
+- **Utilities**  
+  Common helper functions for cryptographic workflows, error handling, and data manipulation.
+
+- **Testing**  
+  A suite of unit tests to validate encryption, hashing, and randomness behavior.
+
+- **Documentation**  
+  Conceptual material on symmetric and asymmetric cryptography to support learning and experimentation.
+
 
 ## 🔧 Compilation
 
@@ -47,7 +47,7 @@ This will generate an executable called `lab-runner`.
 ## ▶️ Running the Project
 
 ```bash, aiignore
-./lab-runner
+./ctf_lab_runner
 ```
 
 You will be prompted to enter the name of a lab (must match exactly one of the listed names). Example:
