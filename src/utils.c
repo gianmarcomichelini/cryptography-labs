@@ -36,30 +36,14 @@ void print_hex_buffer(unsigned char *buf, const size_t len) {
     printf("\n");
 }
 
-
-void print_context_info(EVP_MD_CTX *ctx) {
-    printf("Some context information:\n");
-
-    if (!ctx) {
-        printf("\tContext is NULL\n");
-        return;
-    }
-
-    printf("\tDigest context pointer address: %p\n", (void *) ctx);
-
-    const EVP_MD *md = EVP_MD_CTX_get0_md(ctx);
-    if (md) {
-        printf("\tDigest algorithm: %s\n", EVP_MD_name(md));
-        printf("\tDigest size: %d bytes\n\n", EVP_MD_size(md));
-    } else {
-        printf("\tNo digest algorithm set in context.\n\n");
+// XORs two buffers of length len and stores the result in output buffer
+void xor_buffers(const unsigned char *buf1, const unsigned char *buf2, unsigned char *out, const size_t len) {
+    for (size_t i = 0; i < len; i++) {
+        out[i] = buf1[i] ^ buf2[i];
     }
 }
 
-__attribute__((noreturn))
-void handle_md_errors(const char *err, EVP_MD_CTX *ctx) {
-    fprintf(stderr, "\n%s\n", err);
-    if (ctx)
-        EVP_MD_CTX_free(ctx);
+void handle_openssl_errors(){
+    ERR_print_errors_fp(stderr);
     abort();
 }

@@ -1,71 +1,65 @@
 #include <stdio.h>
 #include <string.h>
-#include "rand/rand.h"
-#include "hashing/hashing.h"
+#include "tests/tests.h"
 
-void guess_algo(void);
-void first_decryption(void);
-void in_the_name_of_the_cipher(void);
-void padding(void);
-void guess_what(void);
-void first_hmac(void);
-void change_dgst(void);
-void keyed_digest(void);
+typedef int (*test_func_t)(void);
+
+typedef struct {
+    const char *name;
+    test_func_t func;
+} test_entry_t;
+
+static test_entry_t tests[] = {
+    {"bytewise_operations", test_bytewise_operations},
+    {"randoms_xor_obtaining_key", test_xor_randoms_and_obtain_key},
+    {"md5_basic_operations", test_digest_md5_compute},
+    {"hmac_sha256_compute", test_hmac_sha256_compute},
+    {"hmac_sha256_verify", test_hmac_sha256_verify},
+    {"hmac_sha256_compute_from_file", test_hmac_sha256_compute_from_file},
+    {"encrypt_aes256_from_message", test_encrypt_aes256_compute},
+    {"encrypt_decrypt_aes256_from_file", test_encrypt_aes256cbc_compute_from_file},
+    {NULL, NULL} // terminator
+};
+
+
 
 int main(void) {
     char input[256];
 
-    // List of available labs
-    printf("available labs:\n");
-    printf("  - openssl-sym: guess-algo, firstdecryption, in-the-name-of-the-cipher, padding\n");
-    printf("  - openssl-asym: guess-what\n");
-    printf("  - openssl-hmac: hmac_compute, hmac_verify, firsthmac\n");
-    printf("  - openssl-dgst: md5_compute, changedgst, keyed-digest\n");
-    printf("  - openssl-rand: bytewise-operations, create-randoms\n");
-    printf("\nenter a lab (full sub-challenge name): ");
 
-    if (fgets(input, sizeof(input), stdin) != NULL) {
-        input[strcspn(input, "\n")] = 0; // strip newline
+    printf("\nAvailable labs:\n");
+    for (int i = 0; tests[i].name != NULL; i++) {
+        printf("  - %s\n", tests[i].name);
+    }
+
+    while (1) {
+
+        printf("\nEnter a lab (full sub-challenge name): ");
+
+        if (fgets(input, sizeof(input), stdin) == NULL) {
+            fprintf(stderr, "Input error\n");
+            continue;
+        }
+
+        input[strcspn(input, "\n")] = '\0';
 
         if (strlen(input) == 0) {
-            fprintf(stderr, "no lab name provided.\n");
-            return 1;
+            fprintf(stderr, "No lab name provided.\n");
+            continue;
         }
 
-
-
-        // Dispatch table
-        if (strcmp(input, "guess-algo") == 0) guess_algo();
-        else if (strcmp(input, "firstdecryption") == 0) first_decryption();
-        else if (strcmp(input, "in-the-name-of-the-cipher") == 0) in_the_name_of_the_cipher();
-        else if (strcmp(input, "padding") == 0) padding();
-        else if (strcmp(input, "guess-what") == 0) guess_what();
-        else if (strcmp(input, "firsthmac") == 0) first_hmac();
-        else if (strcmp(input, "hmac_verify") == 0) hashing_hmac_verify();
-        else if (strcmp(input, "hmac_compute") == 0) hashing_hmac_compute();
-        else if (strcmp(input, "md5_compute") == 0) hashing_md5_compute();
-        else if (strcmp(input, "changedgst") == 0) change_dgst();
-        else if (strcmp(input, "keyed-digest") == 0) keyed_digest();
-        else if (strcmp(input, "bytewise-operations") == 0) bytewise_operations();
-        else if (strcmp(input, "create-randoms") == 0) create_randoms();
-        else {
-            fprintf(stderr, "unknown lab: %s\n", input);
-            return 1;
+        int found = 0;
+        for (int i = 0; tests[i].name != NULL; i++) {
+            if (strcmp(input, tests[i].name) == 0) {
+                int result = tests[i].func();
+                printf("Test finished with code %d\n", result);
+                found = 1;
+                break;
+            }
         }
 
-        return 0;
-    } else {
-        fprintf(stderr, "input error\n");
-        return 1;
+        if (!found) {
+            fprintf(stderr, "Unknown lab: %s\n", input);
+        }
     }
 }
-
-// Dummy function implementations
-void guess_algo(void) { printf("Running guess-algo\n"); }
-void first_decryption(void) { printf("Running firstdecryption\n"); }
-void in_the_name_of_the_cipher(void) { printf("Running in-the-name-of-the-cipher\n"); }
-void padding(void) { printf("Running padding\n"); }
-void guess_what(void) { printf("Running guess-what\n"); }
-void first_hmac(void) { printf("Running firsthmac\n"); }
-void change_dgst(void) { printf("Running changedgst\n"); }
-void keyed_digest(void) { printf("Running keyed-digest\n"); }

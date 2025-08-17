@@ -7,14 +7,17 @@
 
 #include <openssl/evp.h>
 
-// Utility
-extern char *remove_dashes(const char *string, const size_t len);
-extern unsigned char hex_to_byte(const char high, const char low);
-extern void print_openssl_errors(const unsigned long error, char *buf);
-extern void print_hex_buffer(unsigned char *buf, const size_t len);
+extern char *remove_dashes(const char *string, size_t len);
 
-// MD
-extern void print_context_info(EVP_MD_CTX *ctx);
-extern void handle_md_errors(const char *err, EVP_MD_CTX *ctx);
+extern unsigned char hex_to_byte(char high, char low);
+
+extern void print_openssl_errors(unsigned long error, char *buf);
+
+extern void print_hex_buffer(unsigned char *buf, size_t len);
+
+extern void xor_buffers(const unsigned char *buf1, const unsigned char *buf2, unsigned char *out, size_t len);
+
+extern void handle_openssl_errors(void);
+
 
 #endif //UTILS_H
