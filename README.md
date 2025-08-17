@@ -26,9 +26,6 @@ It provides a structured set of components for experimenting with modern cryptog
 - **Testing**  
   A suite of unit tests to validate encryption, hashing, and randomness behavior.
 
-- **Documentation**  
-  Conceptual material on symmetric and asymmetric cryptography to support learning and experimentation.
-
 
 ## 🔧 Compilation
 
