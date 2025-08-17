@@ -23,7 +23,7 @@ int test_encrypt_aes256_compute(void) {
     unsigned char ciphertext[sizeof(plaintext) + EVP_MAX_BLOCK_LENGTH]; // should be an array of 48 bytes (3 blocks)
     int ciphertext_len = 0;
 
-    if (!enc_symm_encrypt_aes256_compute(plaintext, ciphertext, iv, key, plaintext_len, &ciphertext_len, cipher)) {
+    if (!enc_symm_encrypt_compute(plaintext, ciphertext, iv, key, plaintext_len, &ciphertext_len, cipher)) {
         printf("ERROR: Encryption failed");
     }
 

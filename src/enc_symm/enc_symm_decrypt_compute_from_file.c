@@ -5,7 +5,7 @@ enum MODE {
     DECRYPT = 0
 };
 
-int enc_symm_decrypt_aes256cbc_compute_from_file(const unsigned char *key,
+int enc_symm_decrypt_compute_from_file(const unsigned char *key,
                                                  const unsigned char *iv,
                                                  const EVP_CIPHER *cipher,
                                                  FILE *f_in, FILE *f_out) {

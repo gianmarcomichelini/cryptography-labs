@@ -6,7 +6,7 @@ enum MODE {
     DECRYPT = 0
 };
 
-int enc_symm_encrypt_aes256_compute(const unsigned char *plaintext, unsigned char *ciphertext,
+int enc_symm_encrypt_compute(const unsigned char *plaintext, unsigned char *ciphertext,
                                     const unsigned char *iv, const unsigned char* key,
                                     const int plaintext_len, int *ciphertext_len,
                                     const EVP_CIPHER* cipher) {

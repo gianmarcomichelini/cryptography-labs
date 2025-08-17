@@ -31,10 +31,10 @@ add_executable(ctf_lab_runner
         src/hashing/hashing_utils.c
         include/enc_symm/encryption_symmetric_utils.h
         tests/enc_symm/test_encrypt_decrypt_aes256cbc_compute.c
-        src/enc_symm/enc_symm_encrypt_aes256cbc_compute.c
-        src/enc_symm/enc_symm_encrypt_aes256cbc_compute_from_file.c
+        src/enc_symm/enc_symm_encrypt_compute.c
+        src/enc_symm/enc_symm_encrypt_compute_from_file.c
         tests/enc_symm/test_encrypt_aes256cbc_compute_from_file.c
-        src/enc_symm/enc_symm_decrypt_aes256cbc_compute_from_file.c
+        src/enc_symm/enc_symm_decrypt_compute_from_file.c
 )
 
 target_link_libraries(ctf_lab_runner OpenSSL::SSL OpenSSL::Crypto)

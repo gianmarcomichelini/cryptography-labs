@@ -50,7 +50,7 @@ extern int test_encrypt_aes256cbc_compute_from_file(void) {
         return 0;
     }
 
-    if (!enc_symm_decrypt_aes256cbc_compute_from_file(key, iv, cipher, f_out, f_result)) {
+    if (!enc_symm_decrypt_compute_from_file(key, iv, cipher, f_out, f_result)) {
         printf("ERROR: not able to decrypt the file\n");
         return 0;
     }
