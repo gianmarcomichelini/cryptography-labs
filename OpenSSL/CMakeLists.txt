@@ -9,7 +9,7 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 
 include_directories(include)
 
-add_executable(ctf_lab_runner
+add_executable(openssl_lab_runner
         src/main.c
         src/utils.c
         tests/misc/test_bytewise_operations.c
@@ -44,4 +44,4 @@ add_executable(ctf_lab_runner
         src/bignum/bignum_basic_operations.c
 )
 
-target_link_libraries(ctf_lab_runner OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(openssl_lab_runner OpenSSL::SSL OpenSSL::Crypto)
