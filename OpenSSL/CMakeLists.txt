@@ -42,6 +42,11 @@ add_executable(openssl_lab_runner
         src/bignum/bignum_conversions.c
         tests/bignum/test_bignum_basic_operations.c
         src/bignum/bignum_basic_operations.c
+        src/enc_asym/enc_asym_key_generation.c
+        tests/enc_asym/test_enc_asym_basics.c
+        include/enc_asym/encryption_asymmetric_utils.h
+        src/enc_asym/enc_asym_file_operations.c
+        src/enc_asym/enc_asym_RSA.c
 )
 
 target_link_libraries(openssl_lab_runner OpenSSL::SSL OpenSSL::Crypto)

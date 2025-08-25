@@ -20,6 +20,7 @@ static test_entry_t tests[] = {
     {"encrypt_decrypt_aes256_from_file", test_encrypt_aes256cbc_compute_from_file},
     {"bignum_basics", test_bignum_basics},
     {"bignum_basic_operations", test_bignum_basic_operations},
+    {"enc_asym_basics",test_enc_asym_basics},
     {NULL, NULL} // terminator
 };
 

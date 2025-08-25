@@ -27,7 +27,7 @@ extern int test_bignum_basics(void);
 
 extern int test_bignum_basic_operations(void);
 
-
+extern int test_enc_asym_basics(void);
 
 
 #endif //TESTS_H
