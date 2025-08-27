@@ -37,14 +37,14 @@ make
 ```
 
 
-This will generate an executable called `lab-runner`.
+This will generate an executable called `openssl_lab_runner`.
 
 ---
 
 ## ▶️ Running the Project
 
 ```bash, aiignore
-./ctf_lab_runner
+./openssl_lab_runner
 ```
 
 You will be prompted to enter the name of a lab (must match exactly one of the listed names). Example:
