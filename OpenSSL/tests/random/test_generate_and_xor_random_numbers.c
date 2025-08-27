@@ -1,19 +1,21 @@
-
-
 #include "random/random_utils.h"
 #include "utils.h"
 
 #define RANDOM_LEN 32
 
-// Main function demonstrating random generation, XOR, and printing
+/**
+ * @brief Generates two random byte arrays and derives a key via XOR.
+ *
+ * Steps performed:
+ *  - Seeds the pseudo-random number generator (PRNG).
+ *  - Generates two cryptographically strong random byte arrays of length RANDOM_LEN.
+ *  - Computes their XOR, byte by byte, to produce a key.
+ *  - Prints the two random arrays and the resulting key in hexadecimal format.
+ *
+ * @return 0 on success,
+ *         1 on failure
+ */
 int test_xor_randoms_and_obtain_key(void) {
-    printf(
-        "\n==========================================\n"
-        "Generate two cryptographically strong random byte arrays.\n"
-        "XOR the two arrays byte-wise to produce a key.\n"
-        "The key is printed as a hex string with dashes.\n"
-        "==========================================\n\n"
-    );
 
     if (seed_prng(RANDOM_LEN) != EXIT_SUCCESS) {
         fprintf(stderr, "Failed to seed the PRNG\n");

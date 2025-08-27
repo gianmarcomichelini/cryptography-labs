@@ -1,5 +1,5 @@
 # Build directories
-cmake-build-debug/
+OpenSSL/cmake-build-debug/
 build/
 out/
 

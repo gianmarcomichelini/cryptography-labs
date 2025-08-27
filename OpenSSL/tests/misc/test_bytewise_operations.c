@@ -3,14 +3,21 @@
 
 #include "utils.h"
 
+/**
+ * @brief Test of basic bytewise operations (dash removal, hex decoding, XOR).
+ *
+ * Steps performed:
+ *  - Two hexadecimal strings with dashes are given.
+ *  - The dashes are removed.
+ *  - The cleaned strings are converted into byte arrays.
+ *  - The two byte arrays are XORed together to produce a key.
+ *  - The resulting XOR key is printed in hexadecimal format.
+ *
+ * @return 0 on success,
+ *         1 on failure
+ */
 int test_bytewise_operations(void) {
-    printf(
-        "=============================================\n"
-        "Two hex strings are given, separated by dashes.\n"
-        "Remove the dashes, convert to bytes, XOR them.\n"
-        "The XOR result is your key.\n"
-        "=============================================\n"
-    );
+
 
     printf("Given two random numbers:\n");
 

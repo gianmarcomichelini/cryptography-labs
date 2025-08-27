@@ -2,17 +2,24 @@
 #include <stdio.h>
 #include <openssl/bn.h>
 
+/**
+ * @brief Test function for BIGNUM basic operations.
+ *
+ * Initializes sample BIGNUMs, performs basic arithmetic, modular, and logical
+ * operations using bignum_basic_operations().
+ *
+ * @return 0 on success, 1 on failure
+ */
 int test_bignum_basic_operations() {
     BN_CTX *ctx = BN_CTX_new();
     if (!ctx) {
         fprintf(stderr, "Failed to create BN_CTX\n");
-        return 0;
+        return EXIT_FAILURE;
     }
 
     printf("\n\n=======\n"
-        "BIGNUM basic operations\n"
-        "=======\n\n");
-
+           "BIGNUM basic operations\n"
+           "=======\n\n");
 
     BIGNUM *a = BN_new();
     BIGNUM *b = BN_new();
@@ -23,7 +30,7 @@ int test_bignum_basic_operations() {
         fprintf(stderr, "Failed to allocate BIGNUMs\n");
         BN_free(a); BN_free(b); BN_free(m); BN_free(exp);
         BN_CTX_free(ctx);
-        return 0;
+        return EXIT_FAILURE;
     }
 
     // Initialize values
@@ -40,5 +47,5 @@ int test_bignum_basic_operations() {
 
     BN_free(a); BN_free(b); BN_free(m); BN_free(exp);
     BN_CTX_free(ctx);
-    return 1;
+    return EXIT_SUCCESS;
 }

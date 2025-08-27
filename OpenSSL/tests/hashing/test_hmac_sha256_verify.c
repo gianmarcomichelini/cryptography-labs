@@ -8,7 +8,17 @@
 
 #define KEY_LEN 16
 
-// Generates random key, computes HMAC, then verifies it
+/**
+ * @brief Test the computation and verification of an HMAC-SHA256.
+ *
+ * Steps performed:
+ *  - Generate a random secret key of 16 bytes with RAND_bytes
+ *  - Compute the HMAC-SHA256 of the message "Simple Message"
+ *  - Print the secret key and the HMAC digest
+ *  - Verify the computed HMAC against itself
+ *
+ * @return 0 if verification succeeds, 1 if verification fails
+ */
 int test_hmac_sha256_verify(void) {
     int rc;
 
@@ -32,7 +42,6 @@ int test_hmac_sha256_verify(void) {
 
     printf("HMAC digest (SHA256): ");
     print_hex_buffer(hmac_value, hmac_len);
-
 
     // Verify computed HMAC matches expected (itself)
     rc = hashing_hmac_sha256_verify(hmac_key, KEY_LEN, message, message_len, hmac_value, hmac_len);

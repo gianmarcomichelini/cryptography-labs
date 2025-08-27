@@ -1,41 +1,41 @@
 #include "utils.h"
-#include "enc_asym/encryption_asymmetric_utils.h"
+#include "enc_asym/enc_asym_utils.h"
 
+/**
+ * @brief Test function for basic asymmetric RSA operations.
+ *
+ * Performs:
+ *  - RSA keypair generation
+ *  - Saving public and private keys to files
+ *  - Encrypting a plaintext message
+ *  - Reading encrypted message and decrypting it
+ *
+ * @return 0 on success, 1 on failure
+ */
 int test_enc_asym_basics(void) {
     /* KEYPAIR MANAGEMENT */
 
-    // generate the public/private keypair
     EVP_PKEY *rsa_keypair = NULL;
     const int n_bits = 2048;
 
     enc_asym_key_generation(&rsa_keypair, n_bits);
+    if (!rsa_keypair) return EXIT_FAILURE;
 
-    // save the public key into a file
-    FILE *rsa_keypair_public_file = NULL;
-    if ((rsa_keypair_public_file = fopen("../data/key_public.pem", "w")) == NULL) {
-        fprintf(stderr, "Couldn't create the private key file.\n");
-        abort();
-    }
-
+    FILE *rsa_keypair_public_file = fopen("../data/key_public.pem", "w");
+    if (!rsa_keypair_public_file) return EXIT_FAILURE;
     enc_asym_write_pkey_file(rsa_keypair, rsa_keypair_public_file);
 
-
-    // save the private key into a file (no encryption)
-    FILE *rsa_keypair_private_file = NULL;
-    if ((rsa_keypair_private_file = fopen("../data/key_private.pem", "w")) == NULL) {
-        fprintf(stderr, "Couldn't create the private key file.\n");
-        abort();
+    FILE *rsa_keypair_private_file = fopen("../data/key_private.pem", "w");
+    if (!rsa_keypair_private_file) {
+        EVP_PKEY_free(rsa_keypair);
+        return EXIT_FAILURE;
     }
-
     enc_asym_write_private_key_file(rsa_keypair, rsa_keypair_private_file);
 
-
-    /* ENCRYPTION (using the rsa_keypair obtained from above) */
+    /* ENCRYPTION */
 
     const char plaintext[] = "hi!! This is the message to encrypt with RSA";
-
     enc_asym_encrypt_RSA(plaintext, rsa_keypair);
-
 
     /* DECRYPTION */
 
@@ -44,22 +44,22 @@ int test_enc_asym_basics(void) {
 
     FILE *fin = fopen("../data/rsa_decrypt.bin", "r");
     if (!fin) {
-        perror("Unable to open encrypted file");
-        abort();
+        EVP_PKEY_free(rsa_keypair);
+        return EXIT_FAILURE;
     }
     const size_t ciphertext_len = fread(ciphertext, 1, EVP_PKEY_size(rsa_keypair), fin);
-    if (ciphertext_len == 0) {
-        handle_openssl_errors();
-    }
     fclose(fin);
 
+    if (ciphertext_len == 0) {
+        EVP_PKEY_free(rsa_keypair);
+        handle_openssl_errors();
+        return EXIT_FAILURE;
+    }
 
-    enc_asym_decrypt_RSA(ciphertext,ciphertext_len,rsa_keypair);
-
+    enc_asym_decrypt_RSA(ciphertext, ciphertext_len, rsa_keypair);
 
     /* cleanup */
     EVP_PKEY_free(rsa_keypair);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
-

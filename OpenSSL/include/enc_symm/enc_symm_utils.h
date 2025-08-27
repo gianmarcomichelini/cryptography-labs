@@ -16,7 +16,7 @@ extern int enc_symm_encrypt_compute(const unsigned char *plaintext, unsigned cha
                                            int plaintext_len, int *ciphertext_len,
                                            const EVP_CIPHER *cipher);
 
-extern int enc_symm_encrypt_aes256cbc_compute_from_file(unsigned char *ciphertext,
+extern int enc_symm_encrypt_compute_from_file(unsigned char *ciphertext,
                                                         const unsigned char *iv, const unsigned char *key,
                                                         int *ciphertext_len,
                                                         const EVP_CIPHER *cipher,

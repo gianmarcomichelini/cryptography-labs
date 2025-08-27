@@ -3,9 +3,19 @@
 //
 
 #include "utils.h"
-
 #include "hashing/hashing_utils.h"
 
+/**
+ * @brief Test the computation of an MD5 digest.
+ *
+ * Steps performed:
+ *  - Define a simple message string
+ *  - Compute the MD5 digest of the message
+ *  - Print the resulting digest in hexadecimal format
+ *
+ * @return 0 if the MD5 digest is computed successfully,
+ *         1 otherwise
+ */
 int test_digest_md5_compute(void) {
     const char message[] = "Simple message";
 

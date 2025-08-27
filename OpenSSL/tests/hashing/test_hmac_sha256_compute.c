@@ -1,4 +1,4 @@
-#include <_stdlib.h>
+#include <stdlib.h>
 #include <openssl/crypto.h>
 #include <openssl/evp.h>
 
@@ -7,6 +7,16 @@
 
 #define KEY_LEN 16
 
+/**
+ * @brief Test the computation of an HMAC-SHA256 over a simple message.
+ *
+ * Steps performed:
+ *  - Use a fixed key ("deadbeefdeadbeed", 16 bytes)
+ *  - Compute the HMAC-SHA256 of the string "Simple Message"
+ *  - Print the resulting digest in hex format
+ *
+ * @return 0 on success, 1 on failure
+ */
 int test_hmac_sha256_compute(void) {
     const unsigned char key[KEY_LEN] = "deadbeefdeadbeed";
     const size_t key_len = sizeof(key) - 1;
