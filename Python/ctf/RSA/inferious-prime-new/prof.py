@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+from Crypto.Util.number import getPrime, inverse, bytes_to_long, long_to_bytes, GCD
+from secret import flag
+
+assert len(flag) == 23
+
+e = 3
+
+# low exponent attack (ran on Sage)
+
+
+# Here is my super-strong RSA implementation, because it's 1600 bits strong it should be unbreakable
+# ... at least I think so!
+
+# n will be 8 * (100 + 100) = 1600 bits strong which is pretty good
+while True:
+    p = getPrime(100)
+    q = getPrime(100)
+    phi = (p - 1) * (q - 1)
+    d = inverse(e, phi)
+    if d != -1 and GCD(e, phi) == 1:
+        break
+
+n = p * q
+
+pt = bytes_to_long(flag)
+ct = pow(pt, e, n)
+
+print(f"n = {n}")
+print(f"e = {e}")
+print(f"ct = {ct}")
+
+pt = pow(ct, d, n)
+decrypted = long_to_bytes(pt)
+assert decrypted == flag
