@@ -59,8 +59,10 @@ from Crypto.Util.strxor import strxor
 # keystream[0] = 148
 
 
-
+# guess that the frist character of ciphertexts[0] is a 'T'
 keystream[0] = ciphertexts[0][0] ^ ord('T')
+
+# so on ... look for a reasonable output with printable ASCII values
 keystream[1] = ciphertexts[0][1] ^ ord('h')
 keystream[2] = ciphertexts[0][2] ^ ord('i')
 keystream[3] = ciphertexts[0][3] ^ ord('s')
