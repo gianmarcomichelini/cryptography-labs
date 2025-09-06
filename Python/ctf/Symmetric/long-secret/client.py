@@ -58,13 +58,7 @@ from Crypto.Util.strxor import strxor
 
 # keystream[0] = 148
 
-dec = keystream[5] ^ ciphertexts[0][5]
-dec2 = keystream[28] ^ ciphertexts[0][28]
 
-mask = dec ^ ord('i')
-keystream[5] = keystream[5] ^ mask
-mask2 = dec2 ^ ord('o')
-keystream[28] = keystream[28] ^ mask2
 
 keystream[0] = ciphertexts[0][0] ^ ord('T')
 keystream[1] = ciphertexts[0][1] ^ ord('h')
